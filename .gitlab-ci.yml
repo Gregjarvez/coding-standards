@@ -1,0 +1,32 @@
+image: node:14.17
+
+include:
+  - template: Workflows/Branch-Pipelines.gitlab-ci.yml
+
+stages:
+  - publish
+
+default:
+  before_script:
+    - git config user.email "${GITLAB_USER_EMAIL}"
+    - git config user.name "${GITLAB_USER_NAME}"
+
+    - npm config set @dunelm:registry=https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
+    - npm config set //gitlab.com/api/v4/packages/npm/:_authToken=${CI_JOB_TOKEN}
+    - npm config set //gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}
+
+publish_branch:
+  stage: publish
+  script: |
+    set -x
+    PACKAGE_VERSION=$(cat package.json | grep version | sed 's/[version:,\",]//g' | tr -d '[[:space:]]')
+    npm version "$PACKAGE_VERSION-beta$CI_PIPELINE_IID" --no-git-tag-version
+    yarn publish --tag beta
+  rules:
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+
+publish:
+  stage: publish
+  script: yarn publish $CI_COMMIT_TAG --yes --conventional-commits
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

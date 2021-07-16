@@ -1,0 +1,44 @@
+{
+  "name": "@dunelm/coding-standards",
+  "version": "1.0.0",
+  "description": "Shared Dunelm Linting and Formatting Configurations",
+  "repository": "https://gitlab.com/dunelm/product/library/coding-standards",
+  "license": "UNLICENSED",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prepare": "npx is-ci || husky install"
+  },
+  "dependencies": {
+    "@graphql-eslint/eslint-plugin": "^1.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.0",
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-jest-dom": "^3.9.0",
+    "eslint-plugin-jest-formatting": "^3.0.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-no-only-tests": "^2.6.0",
+    "eslint-plugin-no-unsanitized": "^3.1.2",
+    "eslint-plugin-no-wildcard-postmessage": "^0.2.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.0.0",
+    "eslint-plugin-regexp": "^0.13.1",
+    "eslint-plugin-testcafe": "^0.2.1",
+    "eslint-plugin-testing-library": "^4.6.0",
+    "eslint-plugin-woke": "^1.0.0",
+    "prettier": "^2.3.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-sass-guidelines": "^8.0.0",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-order": "^4.1.0"
+  },
+  "devDependencies": {
+    "husky": "^7.0.0",
+    "stylelint-config-idiomatic-order": "^8.1.0"
+  }
+}
